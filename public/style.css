@@ -6,6 +6,9 @@
 	--col: white;
 	color-scheme: dark;
 }
+.gap15 {
+	gap: 15px;
+}
 #navbar {
 	position: fixed;
 	width: 100%;
