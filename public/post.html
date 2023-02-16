@@ -1,0 +1,25 @@
+<head>
+	<title>POST</title>
+	<link href="style.css" rel="stylesheet" type="text/css" />
+</head>
+<h1>POST</h1>
+<script src="script.js"></script>
+<textarea style="height: 300px; width: 100%;" id="post"></textarea>
+<input id="password" type="password">
+<button onclick="get()">generate password</button>
+<button onclick="go()">post</button>
+<a href="/news.html">News</a>
+<script>
+
+	function go() {
+		post("post", {
+			pass: document.getElementById("password").value,
+			post: document.getElementById("post").value
+		})
+	}
+
+	function get() {
+		fetch("getpass")
+	}
+	
+</script>

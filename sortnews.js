@@ -1,6 +1,6 @@
 const fs = require("fs")
 
-var dir = 'posts/';
+var dir = 'public/posts/';
 
 String.template = function(...args) {
 	let t = [...args]
@@ -49,6 +49,14 @@ function EL(...args) {
 	}
 }
 
+function NEWS(title, author, ...elems) {
+	return EL`div.left`(
+		EL`h1`(title),
+		EL`b`("Author: "+author),
+		...elems,
+	)
+}
+
 function func(txt) {
 	return eval(`(function(){${txt}})`)
 }
@@ -74,9 +82,10 @@ fs.readdir(dir, function(err, files){
 		firstTag = {}
 		firstId = {}
 		firstClass = {}
-		let a = func(fs.readFileSync('./posts/'+files[i], "utf-8"))()
-		archive += "EL`quote.clickable`(EL`h3`("+JSON.stringify(firstTag.h1.body[0])+"),EL`p`("+JSON.stringify(firstTag.p.body[0])+")).on('click',()=>{window.location = 'https://insertgame.repl.co/news.html?"+files[i].split(".")[0]+"'}),"
+		let a = func(fs.readFileSync('./public/posts/'+files[i], "utf-8"))()
+		archive += "EL`quote.clickable`(EL`h3`("+JSON.stringify(firstTag.h1.body[0])+"),EL`p`("+JSON.stringify(firstTag.p.body[0])+")).on('click',()=>{window.location = 'news.html?"+files[i].split(".")[0]+"'}),"
 	}
 	archive += ").$({hideToContents:true})"
-	fs.writeFileSync("./posts/archive.js", archive)
+	fs.writeFileSync("./public/posts/archive.js", archive)
+	fs.writeFileSync("./public/latest.js", files[0].replace(".js",""))
 });
