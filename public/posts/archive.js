@@ -1,0 +1,1 @@
+return EL`div.left`(EL`h1`('Archive'),EL`quote.clickable`(EL`h3`("Hello world!"),EL`p`("\nThis is a test post to make sure that the news page works as expected.\nWhich if I set everything up right, it is working.\nMost small stuff will happen on the discord.")).on('click',()=>{window.location = 'https://insertgame.repl.co/news.html?testing'}),).$({hideToContents:true})
