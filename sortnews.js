@@ -74,8 +74,10 @@ fs.readdir(dir, function(err, files){
 		return v.name; });
 
 	let archive = "return EL`div.left`(EL`h1`('Archive'),"
+	let latest
 	for (let i = 0; i < files.length; i++) {
 		if (files[i] == "archive.js") continue
+		latest ??= files[i].replace(".js","")
 		lastTag = {}
 		lastId = {}
 		lastClass = {}
@@ -87,5 +89,5 @@ fs.readdir(dir, function(err, files){
 	}
 	archive += ").$({hideToContents:true})"
 	fs.writeFileSync("./public/posts/archive.js", archive)
-	fs.writeFileSync("./public/latest.js", files[0].replace(".js",""))
+	fs.writeFileSync("./public/latest.js", "const LATEST = "+JSON.stringify(latest))
 });
