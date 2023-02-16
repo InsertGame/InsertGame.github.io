@@ -1,3 +1,5 @@
+if (window.location.host == "insert-games.onrender.com") window.location.host = "insert.games"
+
 String.template = function(...args) {
 	let t = [...args]
 	let Z = [...t[0].raw]
