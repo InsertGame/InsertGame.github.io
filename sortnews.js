@@ -1,4 +1,4 @@
-return function(){
+module.exports = function(){
 	const fs = require("fs")
 
 	var dir = 'public/posts/';
