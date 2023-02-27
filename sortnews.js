@@ -27,8 +27,8 @@ function EL(...args) {
 	let tag = a.replace(/[#\.][^#\.]+/gm, "").trimEnd().trimStart()
 	let id = a.match(/[#][^#\.]+/gm)
 	let classes = a.match(/[\.][^#\.]+/gm)
-	id ??= []
-	classes ??= []
+	id = id || []
+	classes = classes || []
 	return function(...elems) {
 		let elem = {
 			tag: tag,
@@ -39,9 +39,9 @@ function EL(...args) {
 				return elem
 			}
 		}
-		firstTag[tag] ??= elem
-		firstId[id.join(" ")] ??= elem
-		firstClass[classes.join(" ")] ??= elem
+		firstTag[tag] = firstTag[tag] || elem
+		firstId[id.join(" ")] = firstId[id.join(" ")] || elem
+		firstClass[classes.join(" ")] = firstClass[classes.join(" ")] || elem
 		lastTag[tag] = elem
 		lastId[id.join(" ")] = elem
 		lastClass[classes.join(" ")] = elem
@@ -77,7 +77,7 @@ fs.readdir(dir, function(err, files){
 	let latest
 	for (let i = 0; i < files.length; i++) {
 		if (files[i] == "archive.js") continue
-		latest ??= files[i].replace(".js","")
+		latest = latest || files[i].replace(".js","")
 		lastTag = {}
 		lastId = {}
 		lastClass = {}

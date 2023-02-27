@@ -4,6 +4,8 @@ const fs = require("fs")
 const app = express()
 const port = 8080
 
+require("./sortnews.js")
+
 let pass = false;
 
 app.use(express.json())
