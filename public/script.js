@@ -1,4 +1,4 @@
-if (window.location.host == "insert-games.onrender.com") window.location.host = "insert.games"
+// if (window.location.host == "insert-games.onrender.com") window.location.host = "insert.games"
 
 String.template = function(...args) {
 	let t = [...args]
