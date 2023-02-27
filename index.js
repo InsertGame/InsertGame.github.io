@@ -4,7 +4,7 @@ const fs = require("fs")
 const app = express()
 const port = 8080
 
-require("./sortnews.js")
+require("./sortnews.js")()
 
 let pass = false;
 
@@ -19,7 +19,7 @@ app.get("/getpass", (req, res)=>{
 app.post("/post", (req, res)=>{
 	if (pass && req.body.pass == pass) {
 		fs.writeFileSync("./public/posts/"+Date.now()+".js", req.body.post)
-		require("./sortnews.js")
+		require("./sortnews.js")()
 		res.end("done")
 	} else
 	res.end("wrong")
