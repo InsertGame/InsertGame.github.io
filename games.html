@@ -11,42 +11,59 @@
 
 <body>
 	<div id="navbar">
-		<details>
-			<summary>Open Menu</summary>
-			<content>
-				<a href="./"><button>Home</button></a>
-				<a href="games.html"><button>Games</button></a>
-				<a href="apps.html"><button>Applications</button></a>
-				<a href="https://webdesign.thedt365.repl.co/"><button>DT's horrid website</button></a>
-			</content>
-		</details>
-		<a href="./"><button>Home</button></a>
-		<a href="games.html"><button>Games</button></a>
-		<a href="apps.html"><button>Applications</button></a>
-		<a href="https://webdesign.thedt365.repl.co/"><button>DT's horrid website</button></a>
+		<row>
+			<a href="/"><button style="width: 150px">Home</button></a>
+			<a href="games.html"><button style="width: 150px">Games</button></a>
+			<a href="about.html"><button style="width: 150px">About</button></a>
+			<a href="https://webdesign.thedt365.repl.co/"><button style="width: 150px">The Worst Website</button></a>
+		</row>
 	</div>
-	<quote>
-		<h3><a target="_blank" href="https://insert-game-studios.itch.io/not-alone">You're Not Alone</a></h3>
-		<flex class="left gap15">
-			<p>This game is a difficult multiplayer vertical platformer where you can goof off with friends, race to the top, and climb as high as you can to try to get that sweet victory prize at the very top. And if you have no internet, that's fine too, as you can play all by yourself passing and talking to NPCs. Complete with a level editor. <a target="_blank" href="https://insert-game-studios.itch.io/youre-not-alone">Game Jam Edition</a></p>
-			<a target="_blank" href="https://insert-game-studios.itch.io/not-alone"><img style="min-width: 300px;" src="not_alone.png"></a>
-		</flex>
-	</quote>
-	<quote>
-		<h3><a target="_blank" href="https://insert-game-studios.itch.io/there-is-no-aim">There Is No Aim</a></h3>
-		<flex class="left gap15">
-			<a target="_blank" href="https://insert-game-studios.itch.io/there-is-no-aim"><img style="min-width: 300px;" src="noaim.png"></a>
-			<p>
-				A chaotic and extremely difficult shooter game where your aim is controlled by the direction you move. The controls are simple: use WASD to move and Space to shoot. The farther you get, the more difficult it becomes. Good luck.
-				<br><br>
-				The original version was made in under 6 hours, and I decided to remake it.
-			</p>
-		</flex>
-	</quote>
-	<quote>
-		<h3><a target="_blank" href="https://dt-is-not-available.github.io/epicadventure">Epic Adventure Of A Person To A Place That Is Very Far Away With A Magic Wizard Guy That Helps You On Your Journey</a></h3>
-		<p>funny school project</p>
-	</quote>
+	<h2>Work In Progress</h2>
+	<p>These are games that aren't quite done. Think of them like a beta. They could appear or disappear at any time.</p>
+	<div class="gamegrid">
+		<a class="gamecard" target="_blank" href="https://incremental-inc.thedt365.repl.co">
+			<img style="min-width: 315px;" src="incinc.png">
+			<div class="info">
+				<div class="title">Incremental Inc.</div>
+				<div>There is a number, and you make it go up. Inspired by (and also kinda mocking) titles like Cookie Clicker and Universal Paperclips</div>
+			</div>
+		</a>
+	</div>
+	<h2>Finished Games</h2>
+	<p>These are all the games that are feature complete. They may receive updates in the future, but they are fully playable start to finish.</p>
+	<div class="gamegrid">
+		<a class="gamecard" target="_blank" href="https://insert-game-studios.itch.io/this-is-you">
+			<img style="min-width: 315px;" src="thisisyou.png">
+			<div class="info">
+				<div class="title">This is You</div>
+				<div>An extremely difficult platformer with no moving parts. Good luck.</div>
+			</div>
+			<div class="platform">Desktop Only</div>
+		</a>
+		<a class="gamecard" target="_blank" href="https://insert-game-studios.itch.io/not-alone">
+			<img style="min-width: 315px;" src="not_alone.png">
+			<div class="info">
+				<div class="title">You're Not Alone</div>
+				<div>An extremely difficult multiplayer platformer where the only goal is to get to the top.</div>
+			</div>
+			<div class="platform">Desktop Only</div>
+		</a>
+		<a class="gamecard" target="_blank" href="https://insert-game-studios.itch.io/there-is-no-aim">
+			<img style="min-width: 315px;" src="noaim.png">
+			<div class="info">
+				<div class="title">There is no Aim</div>
+				<div>A chaotic shooter game where movement direction and aiming are bound together. Think twin stick shooter if you could only use one stick.</div>
+			</div>
+			<div class="platform">Desktop Only</div>
+		</a>
+		<a class="gamecard" target="_blank" href="https://dt-is-not-available.github.io/epicadventure">
+			<img style="min-width: 315px;" src="mrwiz_old.png">
+			<div class="info">
+				<div class="title">Epic Adventure Of A Person To A Place That Is Very Far Away With A Magic Wizard Guy That Helps You On Your Journey</div>
+				<div>funny school project. i got an A+ on this</div>
+			</div>
+		</a>
+	</div>
 	<script src="script.js"></script>
 </body>
 
