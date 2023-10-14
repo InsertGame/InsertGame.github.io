@@ -72,7 +72,7 @@ button:hover::after {
 .gamegrid {
 	display: flex;
 	flex-wrap: wrap;
-	justify-content: space-around;
+	justify-content: center;
 	gap: 20px;
 }
 button::before {
