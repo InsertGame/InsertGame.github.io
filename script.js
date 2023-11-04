@@ -134,6 +134,7 @@ if (document.getElementById("game") && false) {
 		const sphere = document.getElementById("sphere")
 		const onei = document.getElementById("one")
 		const select = document.getElementById("select")
+		const block = document.getElementById("block")
 
 		let char = 0
 		let shape = 0
