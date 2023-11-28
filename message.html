@@ -4,6 +4,7 @@
 <style>
 body {
 font-family: monospace;
+white-space: pre-wrap;
 }
 </style>
 </head>
@@ -12,7 +13,7 @@ font-family: monospace;
 <p>i use this page when i want to make links to pages with messages on them but i dont feel like making a new html page for it. if you figure out how to use it feel free to use it yourself.</p>
 <script>
 if (location.search) {
-  document.body.innerText = decodeURIComponent(location.search.replace("?",""))
+  document.body.innerText = decodeURIComponent(location.search.replace("?","")).replaceAll("\\n","\n")
 }
 </script>
 </body>
