@@ -1,0 +1,18 @@
+<html>
+<head>
+<title>message</title>
+<style>
+body {
+font-family: monospace;
+}
+</style>
+</head>
+<body>
+<h1>message.html</h1>
+<p>i use this page when i want to make links to pages with messages on them but i dont feel like making a new html page for it. if you figure out how to use it feel free to use it yourself.</p>
+<script>
+if (location.search) {
+  document.body.innerText = location.search.replace("?","")
+}
+</script>
+</body>
