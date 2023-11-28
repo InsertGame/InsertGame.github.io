@@ -14,7 +14,7 @@ white-space: pre-wrap;
 <script>
 if (location.search) {
   const [text, style] = location.search.replace("?","").split("&")
-  try { Object.assign(document.body.style, JSON.parse(style)) } catch (e) {}
+  try { Object.assign(document.body.style, JSON.parse(style)) } catch (e) { console.error(e) }
   document.body.innerText = decodeURIComponent(text).replaceAll("\\n","\n")
 }
 </script>
