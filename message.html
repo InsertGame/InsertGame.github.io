@@ -13,7 +13,9 @@ white-space: pre-wrap;
 <p>i use this page when i want to make links to pages with messages on them but i dont feel like making a new html page for it. if you figure out how to use it feel free to use it yourself.</p>
 <script>
 if (location.search) {
-  document.body.innerText = decodeURIComponent(location.search.replace("?","")).replaceAll("\\n","\n")
+  const [text, style] = location.search.replace("?","").split("&")
+  try { Object.assign(document.body.style, JSON.parse(style)) } catch (e) {}
+  document.body.innerText = decodeURIComponent(text).replaceAll("\\n","\n")
 }
 </script>
 </body>
