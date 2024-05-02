@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width">
+	<title>[INSERT GAME] - Bug Report</title>
+	<link href="/style.css" rel="stylesheet" type="text/css" />
+  	<link rel="icon" type="image/x-icon" href="/insertgames.png">
+</head>
+
+<body>
+	<div id="navbar">
+		<row>
+			<a href="/"><button style="width: 150px">Home</button></a>
+			<a href="/games"><button style="width: 150px">Games</button></a>
+			<a href="/about"><button style="width: 150px">About</button></a>
+			<a href="/announcements"><button style="width: 150px">News</button></a>
+		</row>
+	</div>
+	<h1>Bug Report</h1>
+	<div id="bugreport">
+		<p>Fill out a bug report for the game below:</p>
+		<div id="user">
+			<p><label>What is your in-game username? <input type="text"></label></p>
+		</div>
+		<div id="game">
+			<p><label>What game are you playing? <input type="text"></label></p>
+		</div>
+		<div id="version">
+			<p><label>Which version are you using? <input type="number"></label></p>
+		</div>
+		<div id="description">
+			<p>What went wrong and what did you expect?</p>
+			<p><textarea cols="100" rows="25"></textarea></p>
+		</div>
+		<div id="recreation">
+			<p>What are the steps to recreate this bug? If you do not know, that is fine.</p>
+			<p><textarea cols="100" rows="25"></textarea></p>
+		</div>
+		<p><button onclick="submitBugReport()">Submit Bug Report</button></p>
+	</div>
+	<script src="reporter.js"></script>
+</body>
+
+</html>
