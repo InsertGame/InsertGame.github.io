@@ -184,7 +184,7 @@ img {
 blockquote:before, blockquote:after {
 	content: '"'
 }
-quote {
+quote, table {
 	border: 2px solid #a0f;
 	box-shadow: 0px 0px 10px #a0f3;
 	background: radial-gradient(circle, rgba(38,0,55,1) 0%, rgba(0,0,0,1) 100%);
@@ -195,6 +195,12 @@ quote {
 	margin: 10px 0;
 	width: 100%;
 	display: block;
+}
+table tr td {
+	text-align: left;
+}
+table tr.pad td {
+	padding: 10px;
 }
 .quotes {
 	flex-wrap: wrap;
