@@ -1,0 +1,123 @@
+* {
+	box-sizing: border-box;
+}
+:root {
+	font-family: system-ui;
+	--col: white;
+	color-scheme: dark;
+}
+button {
+	background-color: white;
+	border: none;
+	font-family: system-ui;
+	color: #FFA300;
+	padding: 10px 20px;
+	cursor: pointer;
+	font-size: 12px;
+	position: relative;
+	overflow: hidden;
+	font-weight: bolder;
+}
+button:hover {
+	z-index: 1;
+	box-shadow: 0px 0px 30px #FFEC2775;
+	background-color: #FFEC27;
+	color: #222;
+}
+button::after {
+	content: ' ';
+	display: block;
+	background-color: transparent;
+	position: absolute;
+	right: -100px;
+	top: -18px;
+	height: 200%;
+	width: 20px;
+	rotate: 45deg;
+}
+button:hover::after {
+	background-color: #FFA300;
+	right: 0;
+	transition: background 0.25s, right 0.25s;
+}
+button::before {
+	content: ' ';
+	display: block;
+	background-color: transparent;
+	border-right: 10px solid transparent;
+	border-left: 3px solid transparent;
+	position: absolute;
+	left: -100px;
+	top: -18px;
+	height: 200%;
+	width: 10px;
+	rotate: 45deg;
+}
+button:hover::before {
+	border-right: 10px solid #F6FF84;
+	border-left: 3px solid #F6FF84;
+	left: 0px;
+	transition: border 0.25s, left 0.25s;
+}
+button {
+	transition: background 0.2s, color 0.2s, border 0.2s, box-shadow 0.2s;
+}
+html {
+	width: 100%;
+	height: 100%;
+}
+body {
+	width: 100%;
+	height: 100%;
+	color-scheme: dark;
+	color: white;
+	display: flex;
+	flex-direction: column;
+	align-content: center;
+	text-align: center;
+	flex-wrap: wrap;
+	margin: 0px;
+	overflow-y: auto;
+	background: radial-gradient(circle, rgba(38,0,55,1) 0%, rgba(0,0,0,1) 100%);
+	background-attachment: fixed;
+	box-sizing: content-box;
+}
+.logo {
+	margin-top: auto;
+	align-self: center;
+}
+body.imgbg {
+	background: url("gamespanel.png");
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+	background: #222;
+}
+html {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	align-content: center;
+}
+img {
+	user-select: none;
+	margin: 0px;
+}
+#nav {
+	display: flex;
+	gap: 10px;
+	margin-bottom: auto;
+	justify-content: center;
+	align-items: stretch;
+}
+#nav button {
+	width: 140px;
+}
+@media (max-width: 1000px) {
+	#nav {
+		flex-direction: column;
+	}
+	#nav button {
+		width: auto;
+	}
+}

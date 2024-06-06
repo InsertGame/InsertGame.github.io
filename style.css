@@ -45,7 +45,11 @@ button {
 	position: relative;
 	overflow: hidden;
 }
-button:hover {
+button[disabled] {
+	color: #fff7;
+	cursor: not-allowed;
+}
+button:not([disabled]):hover {
 	box-shadow: 0px 0px 30px #FFEC2745;
 	background-color: #FFEC27;
 	border: 2px solid white;
@@ -64,7 +68,7 @@ button::after {
 	width: 20px;
 	rotate: 45deg;
 }
-button:hover::after {
+button:not([disabled]):hover::after {
 	background-color: #FFA300;
 	right: 0;
 	transition: background 0.5s, right 0.25s;
@@ -88,7 +92,7 @@ button::before {
 	width: 10px;
 	rotate: 45deg;
 }
-button:hover::before {
+button:not([disabled]):hover::before {
 	border-right: 10px solid #F6FF84;
 	border-left: 3px solid #F6FF84;
 	left: 0px;
@@ -114,6 +118,28 @@ body {
 	background-attachment: fixed;
 	box-sizing: content-box;
 	padding: 0px 20px;
+}
+.game-90deg {
+	background: conic-gradient(
+		#eee 90deg, /* no way 90 degrees */
+		#ccc 90deg 180deg,
+		#eee 180deg 270deg,
+		#ccc 270deg
+	);
+	background-repeat: repeat;
+	background-position: top left;
+	background-size: 60px 60px;
+	color-scheme: dark;
+}
+.darkbg {
+	background-color: #000a;
+	padding: 30px;
+}
+.gold {
+	box-shadow: 0px 0px 30px #FFEC2745;
+	background-color: #FFEC27;
+	border: 2px solid white;
+	border-right-color: #FF6C24;
 }
 .gamecard {
 	box-shadow: 0px 0px 30px #FFEC2745;
@@ -199,8 +225,8 @@ quote, table {
 table tr td {
 	text-align: left;
 }
-table tr.pad td {
-	padding: 10px;
+.pad {
+	padding: 20px;
 }
 .quotes {
 	flex-wrap: wrap;
