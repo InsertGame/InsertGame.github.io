@@ -22,7 +22,7 @@ const extension = {
             LoadHandler.registerTiles()
         })
         EventHandler.registerButton(200, 800, 200, 64, ()=>{
-            const container = document.createElement("div")
+            const container = document.createElement("textarea")
             document.body.append(container)
             container.style = `
             position: fixed;
@@ -30,12 +30,14 @@ const extension = {
             right: 0;
             top: 0;
             bottom: 0;
+            resize: none;
             background: #000c;
             color: white;
+            padding: 100px;
             outline: none;
             border: none;
             `
-            container.innerText = "\n\n\n\n\n                 Loading..."
+            container.innerText = "Loading..."
 
             require.config({ paths: { 'vs': 'https://unpkg.com/monaco-editor@latest/min/vs' }});
             window.MonacoEnvironment = { getWorkerUrl: () => proxy };
@@ -98,7 +100,11 @@ SetupScreen.prototype.init = function(...args) {
 
 // this is definitely an ok thing to listen for
 document.addEventListener(LoadEvent.LoadHandlerCheckVitalClasses, async () => {
-    const res = await fetch("https://unpkg.com/monaco-editor@latest/min/vs/loader.js") // get lib
-    const code = await res.text()
-    eval.apply(window, [code]) // this is fiiiine :)
+    console.log("hold on gotta uhh get this shit downloaded...")
+    await new Promise(resolve => {
+        const script = document.createElement("script")
+        script.src = "https://unpkg.com/monaco-editor@latest/min/vs/loader.js"
+        script.onload = ()=>resolve()
+    })
+    console.log("aight we good")
 }, {once: true})
