@@ -1,6 +1,7 @@
 // its just a minesweeper mod lmao
 
 let container
+let editor
 
 document.addEventListener("keydown", e => { if (e.key == "`") Settings.unsaved.debug.enabled = !Settings.unsaved.debug.enabled })
 const olddraw = SetupScreen.prototype.draw
@@ -55,10 +56,16 @@ const extension = {
                 `], { type: 'text/javascript' }));
     
                 require(["vs/editor/editor.main"], function () {
-                    container.style.padding = "0px"
+                    container.style = `
+                    position: fixed;
+                    left: 0;
+                    right: 0;
+                    top: 0;
+                    bottom: 0;
+                    `
                     container.innerText = ""
-                    let editor = monaco.editor.create(container, {
-                        value: "",
+                    editor = monaco.editor.create(container, {
+                        value: localStorage.dtquickrunner || "",
                         language: 'javascript',
                         theme: 'vs-dark',
                         automaticLayout: true,
@@ -75,8 +82,9 @@ const extension = {
                         contextMenuOrder: 0,
                         run: function (ed) {
                             try {
+                                localStorage.dtquickrunner = editor.getValue()
                                 eval(editor.getValue())
-                                this.init = false
+                                setupScreen = new SetupScreen()
                                 tileManager.tiles = []
                                 tileManager.totalGenerationChance = 0
                                 LoadHandler.registerTiles()
