@@ -99,7 +99,7 @@ SetupScreen.prototype.init = function(...args) {
 }
 
 // this is definitely an ok thing to listen for
-document.addEventListener(LoadEvent.LoadHandlerCheckVitalClasses, async () => {
+document.addEventListener(LoadEvent.LoadHandlerRegisterTiles, async () => {
     console.log("hold on gotta uhh get this shit downloaded...")
     await new Promise(resolve => {
         const script = document.createElement("script")
