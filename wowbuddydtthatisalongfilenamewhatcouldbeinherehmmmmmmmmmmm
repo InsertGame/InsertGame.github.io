@@ -22,7 +22,7 @@ const extension = {
             LoadHandler.registerTiles()
         })
         EventHandler.registerButton(200, 800, 200, 64, ()=>{
-            const container = document.createElement("textarea")
+            const container = document.createElement("div")
             document.body.append(container)
             container.style = `
             position: fixed;
@@ -30,14 +30,12 @@ const extension = {
             right: 0;
             top: 0;
             bottom: 0;
-            resize: none;
             background: #000c;
             color: white;
-            padding: 100px;
             outline: none;
             border: none;
             `
-            container.innerText = "Loading..."
+            container.innerText = "\n\n\n\n\n                 Loading..."
 
             require.config({ paths: { 'vs': 'https://unpkg.com/monaco-editor@latest/min/vs' }});
             window.MonacoEnvironment = { getWorkerUrl: () => proxy };
