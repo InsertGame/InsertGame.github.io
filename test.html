@@ -1,6 +1,6 @@
 <script src="https://unpkg.com/monaco-editor@latest/min/vs/loader.js"></script>
 
-<div id="container" style="height:500px"></div>
+<div id="container" style="position: fixed; width: 100%; height: 100%; left: 0px; right: 0px; top: 0px; bottom: 0px;"></div>
 
 <script>
 
@@ -18,7 +18,8 @@ require(["vs/editor/editor.main"], function () {
 	let editor = monaco.editor.create(document.getElementById('container'), {
 		value: "",
 		language: 'javascript',
-		theme: 'vs-dark'
+		theme: 'vs-dark',
+		automaticLayout: true,
 	});
 	window.editor = editor
 });
