@@ -18,11 +18,13 @@ const extension = {
         
     },
     init() {
-        EventHandler.registerButton(200, 900, 200, 64, ()=>{
-            this.init = false
+        EventHandler.registerButton(200, 900, 200, 64, async ()=>{
             tileManager.tiles = []
             tileManager.totalGenerationChance = 0
-            LoadHandler.registerTiles()
+            GameHandler.state = GameState.Loading
+            await LoadHandler.registerTiles()
+            GameHandler.state = GameState.GameSetup
+            setupScreen = new SetupScreen()
         })
         EventHandler.registerButton(200, 800, 200, 64, ()=>{
             if (!container) {
@@ -81,17 +83,19 @@ const extension = {
                         contextMenuGroupId: "navigation",
                         contextMenuOrder: 0,
                         run: async function (ed) {
+                            container.remove()
                             try {
                                 localStorage.dtquickrunner = editor.getValue()
                                 eval(editor.getValue())
                                 tileManager.tiles = []
                                 tileManager.totalGenerationChance = 0
+                                GameHandler.state = GameState.Loading
                                 await LoadHandler.registerTiles()
+                                GameHandler.state = GameState.GameSetup
                                 setupScreen = new SetupScreen()
                             } catch(e) {
                                 console.log(e)
                             }
-                            container.remove()
                         },
                     })
                 });
