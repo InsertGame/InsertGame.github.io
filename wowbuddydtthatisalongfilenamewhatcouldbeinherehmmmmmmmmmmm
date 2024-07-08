@@ -22,15 +22,38 @@ const extension = {
             LoadHandler.registerTiles()
         })
         EventHandler.registerButton(200, 800, 200, 64, ()=>{
-            try {
-                eval(prompt("EVAL"))
-                this.init = false
-                tileManager.tiles = []
-                tileManager.totalGenerationChance = 0
-                LoadHandler.registerTiles()
-            } catch(e) {
-                console.log(e)
-            }
+            let input = document.createElement("textarea")
+            document.body.append(input)
+            input.style = `
+            position: fixed;
+            left: 0;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            resize: none;
+            background: #000c;
+            color: white;
+            padding: 100px;
+            outline: none;
+            border: none;
+            `
+            input.focus()
+            input.placeholder = "Press CTRL+ENTER when done"
+            input.addEventListener("click", e=>e.stopPropagation())
+            input.addEventListener("keydown", e=>{
+                if (e.key == "Enter" && e.ctrlKey) {
+                    try {
+                        eval(prompt("EVAL"))
+                        this.init = false
+                        tileManager.tiles = []
+                        tileManager.totalGenerationChance = 0
+                        LoadHandler.registerTiles()
+                    } catch(e) {
+                        console.log(e)
+                    }
+                    input.remove()
+                }
+            })
         })
     }
 }
