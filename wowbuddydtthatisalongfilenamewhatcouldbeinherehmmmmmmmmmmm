@@ -84,10 +84,10 @@ const extension = {
                             try {
                                 localStorage.dtquickrunner = editor.getValue()
                                 eval(editor.getValue())
-                                setupScreen = new SetupScreen()
                                 tileManager.tiles = []
                                 tileManager.totalGenerationChance = 0
-                                LoadHandler.registerTiles()
+                                await LoadHandler.registerTiles()
+                                setupScreen = new SetupScreen()
                             } catch(e) {
                                 console.log(e)
                             }
