@@ -80,7 +80,7 @@ const extension = {
                         keybindingContext: null,
                         contextMenuGroupId: "navigation",
                         contextMenuOrder: 0,
-                        run: function (ed) {
+                        run: async function (ed) {
                             try {
                                 localStorage.dtquickrunner = editor.getValue()
                                 eval(editor.getValue())
