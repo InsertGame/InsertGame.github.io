@@ -102,5 +102,5 @@ SetupScreen.prototype.init = function(...args) {
 document.addEventListener(LoadEvent.LoadHandlerCheckVitalClasses, async () => {
     const res = await fetch("https://unpkg.com/monaco-editor@latest/min/vs/loader.js") // get lib
     const code = await res.text()
-    eval(code) // this is fiiiine :)
+    eval.apply(window, [code]) // this is fiiiine :)
 }, {once: true})
