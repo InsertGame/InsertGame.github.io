@@ -43,7 +43,7 @@ const extension = {
             input.addEventListener("keydown", e=>{
                 if (e.key == "Enter" && e.ctrlKey) {
                     try {
-                        eval(prompt("EVAL"))
+                        eval(input.value)
                         this.init = false
                         tileManager.tiles = []
                         tileManager.totalGenerationChance = 0
