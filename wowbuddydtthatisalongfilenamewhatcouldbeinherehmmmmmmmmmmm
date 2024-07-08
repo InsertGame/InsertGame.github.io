@@ -52,7 +52,7 @@ const extension = {
             `], { type: 'text/javascript' }));
 
             require(["vs/editor/editor.main"], function () {
-                let editor = monaco.editor.create(document.getElementById('container'), {
+                let editor = monaco.editor.create(container, {
                     value: "",
                     language: 'javascript',
                     theme: 'vs-dark',
