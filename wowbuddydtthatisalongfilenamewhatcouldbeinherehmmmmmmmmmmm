@@ -22,9 +22,9 @@ const extension = {
             LoadHandler.registerTiles()
         })
         EventHandler.registerButton(200, 800, 200, 64, ()=>{
-            let input = document.createElement("textarea")
-            document.body.append(input)
-            input.style = `
+            const container = document.createElement("textarea")
+            document.body.append(container)
+            container.style = `
             position: fixed;
             left: 0;
             right: 0;
@@ -37,23 +37,51 @@ const extension = {
             outline: none;
             border: none;
             `
-            input.focus()
-            input.placeholder = "Press CTRL+ENTER when done"
-            input.addEventListener("click", e=>e.stopPropagation())
-            input.addEventListener("keydown", e=>{
-                if (e.key == "Enter" && e.ctrlKey) {
-                    try {
-                        eval(input.value)
-                        this.init = false
-                        tileManager.tiles = []
-                        tileManager.totalGenerationChance = 0
-                        LoadHandler.registerTiles()
-                    } catch(e) {
-                        console.log(e)
-                    }
-                    input.remove()
-                }
-            })
+            container.innerText = "Loading..."
+
+            require.config({ paths: { 'vs': 'https://unpkg.com/monaco-editor@latest/min/vs' }});
+            window.MonacoEnvironment = { getWorkerUrl: () => proxy };
+
+            let proxy = URL.createObjectURL(new Blob([`
+                self.MonacoEnvironment = {
+                    baseUrl: 'https://unpkg.com/monaco-editor@latest/min/'
+                };
+                importScripts('https://unpkg.com/monaco-editor@latest/min/vs/base/worker/workerMain.js');
+            `], { type: 'text/javascript' }));
+
+            require(["vs/editor/editor.main"], function () {
+                let editor = monaco.editor.create(document.getElementById('container'), {
+                    value: "",
+                    language: 'javascript',
+                    theme: 'vs-dark',
+                    automaticLayout: true,
+                });
+                editor.addAction({
+                    id: "run-code",
+                    label: "Run Code",
+                    keybindings: [
+                        monaco.KeyCode.F5,
+                    ],
+                    precondition: null,
+                    keybindingContext: null,
+                    contextMenuGroupId: "navigation",
+                    contextMenuOrder: 0,
+                    run: function (ed) {
+                        try {
+                            eval(editor.getValue())
+                            this.init = false
+                            tileManager.tiles = []
+                            tileManager.totalGenerationChance = 0
+                            LoadHandler.registerTiles()
+                        } catch(e) {
+                            console.log(e)
+                        }
+                        container.remove()
+                    },
+                })
+            });
+
+            container.addEventListener("click", e=>e.stopPropagation())
         })
     }
 }
@@ -69,3 +97,10 @@ SetupScreen.prototype.init = function(...args) {
     oldinit.apply(this, args)
     extension.init.apply(this, args)
 }
+
+// this is definitely an ok thing to listen for
+document.addEventListener(LoadEvent.LoadHandlerCheckVitalClasses, async () => {
+    const res = await fetch("https://unpkg.com/monaco-editor@latest/min/vs/loader.js") // get lib
+    const code = await res.text()
+    eval(code) // this is fiiiine :)
+}, {once: true})
