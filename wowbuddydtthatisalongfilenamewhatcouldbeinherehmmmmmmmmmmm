@@ -22,7 +22,7 @@ const extension = {
             LoadHandler.registerTiles()
         })
         EventHandler.registerButton(200, 800, 200, 64, ()=>{
-            const container = document.createElement("textarea")
+            const container = document.createElement("div")
             document.body.append(container)
             container.style = `
             position: fixed;
@@ -36,6 +36,8 @@ const extension = {
             padding: 100px;
             outline: none;
             border: none;
+            font-family: monospace;
+            whitespace: pre;
             `
             container.innerText = "Loading..."
 
@@ -99,12 +101,15 @@ SetupScreen.prototype.init = function(...args) {
 }
 
 // this is definitely an ok thing to listen for
-document.addEventListener(LoadEvent.LoadHandlerRegisterTiles, async () => {
+document.addEventListener(LoadEvent.LoadHandlerRegisterTiles, () => {
     console.log("hold on gotta uhh get this shit downloaded...")
-    await new Promise(resolve => {
+    return new Promise(resolve => {
         const script = document.createElement("script")
         script.src = "https://unpkg.com/monaco-editor@latest/min/vs/loader.js"
-        script.onload = ()=>resolve()
+        script.onload = ()=>{
+            resolve()
+            console.log("aight we good")
+        }
+        document.body.append(script)
     })
-    console.log("aight we good")
 }, {once: true})
