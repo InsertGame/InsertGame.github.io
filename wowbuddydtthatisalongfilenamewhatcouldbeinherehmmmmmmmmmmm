@@ -1,5 +1,7 @@
 // its just a minesweeper mod lmao
 
+let container
+
 document.addEventListener("keydown", e => { if (e.key == "`") Settings.unsaved.debug.enabled = !Settings.unsaved.debug.enabled })
 const olddraw = SetupScreen.prototype.draw
 const oldtick = SetupScreen.prototype.tick
@@ -22,70 +24,72 @@ const extension = {
             LoadHandler.registerTiles()
         })
         EventHandler.registerButton(200, 800, 200, 64, ()=>{
-            const container = document.createElement("div")
-            document.body.append(container)
-            container.style = `
-            position: fixed;
-            left: 0;
-            right: 0;
-            top: 0;
-            bottom: 0;
-            resize: none;
-            background: #000c;
-            color: white;
-            padding: 100px;
-            outline: none;
-            border: none;
-            font-family: monospace;
-            whitespace: pre;
-            `
-            container.innerText = "Loading..."
-
-            require.config({ paths: { 'vs': 'https://unpkg.com/monaco-editor@latest/min/vs' }});
-            window.MonacoEnvironment = { getWorkerUrl: () => proxy };
-
-            let proxy = URL.createObjectURL(new Blob([`
-                self.MonacoEnvironment = {
-                    baseUrl: 'https://unpkg.com/monaco-editor@latest/min/'
-                };
-                importScripts('https://unpkg.com/monaco-editor@latest/min/vs/base/worker/workerMain.js');
-            `], { type: 'text/javascript' }));
-
-            require(["vs/editor/editor.main"], function () {
-                container.style.padding = "0px"
-                container.innerText = ""
-                let editor = monaco.editor.create(container, {
-                    value: "",
-                    language: 'javascript',
-                    theme: 'vs-dark',
-                    automaticLayout: true,
+            if (!container) {
+                container = document.createElement("div")
+                document.body.append(container)
+                container.style = `
+                position: fixed;
+                left: 0;
+                right: 0;
+                top: 0;
+                bottom: 0;
+                resize: none;
+                background: #000c;
+                color: white;
+                padding: 100px;
+                outline: none;
+                border: none;
+                font-family: monospace;
+                whitespace: pre;
+                `
+                container.innerText = "Loading..."
+    
+                require.config({ paths: { 'vs': 'https://unpkg.com/monaco-editor@latest/min/vs' }});
+                window.MonacoEnvironment = { getWorkerUrl: () => proxy };
+    
+                let proxy = URL.createObjectURL(new Blob([`
+                    self.MonacoEnvironment = {
+                        baseUrl: 'https://unpkg.com/monaco-editor@latest/min/'
+                    };
+                    importScripts('https://unpkg.com/monaco-editor@latest/min/vs/base/worker/workerMain.js');
+                `], { type: 'text/javascript' }));
+    
+                require(["vs/editor/editor.main"], function () {
+                    container.style.padding = "0px"
+                    container.innerText = ""
+                    let editor = monaco.editor.create(container, {
+                        value: "",
+                        language: 'javascript',
+                        theme: 'vs-dark',
+                        automaticLayout: true,
+                    });
+                    editor.addAction({
+                        id: "run-code",
+                        label: "Run Code",
+                        keybindings: [
+                            monaco.KeyCode.F5,
+                        ],
+                        precondition: null,
+                        keybindingContext: null,
+                        contextMenuGroupId: "navigation",
+                        contextMenuOrder: 0,
+                        run: function (ed) {
+                            try {
+                                eval(editor.getValue())
+                                this.init = false
+                                tileManager.tiles = []
+                                tileManager.totalGenerationChance = 0
+                                LoadHandler.registerTiles()
+                            } catch(e) {
+                                console.log(e)
+                            }
+                            container.remove()
+                        },
+                    })
                 });
-                editor.addAction({
-                    id: "run-code",
-                    label: "Run Code",
-                    keybindings: [
-                        monaco.KeyCode.F5,
-                    ],
-                    precondition: null,
-                    keybindingContext: null,
-                    contextMenuGroupId: "navigation",
-                    contextMenuOrder: 0,
-                    run: function (ed) {
-                        try {
-                            eval(editor.getValue())
-                            this.init = false
-                            tileManager.tiles = []
-                            tileManager.totalGenerationChance = 0
-                            LoadHandler.registerTiles()
-                        } catch(e) {
-                            console.log(e)
-                        }
-                        container.remove()
-                    },
-                })
-            });
-
-            container.addEventListener("click", e=>e.stopPropagation())
+    
+                container.addEventListener("click", e=>e.stopPropagation())
+            } else document.body.append(container)
         })
     }
 }
