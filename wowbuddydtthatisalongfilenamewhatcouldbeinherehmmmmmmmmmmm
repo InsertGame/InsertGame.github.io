@@ -1,0 +1,48 @@
+// its just a minesweeper mod lmao
+
+document.addEventListener("keydown", e => { if (e.key == "`") Settings.unsaved.debug.enabled = !Settings.unsaved.debug.enabled })
+const olddraw = SetupScreen.prototype.draw
+const oldtick = SetupScreen.prototype.tick
+const oldinit = SetupScreen.prototype.init
+const extension = {
+    draw() {
+        ctx.strokeText("Reload tiles", 300, 932)
+        ctx.fillText("Reload tiles", 300, 932)
+        ctx.strokeText("Eval String", 300, 832)
+        ctx.fillText("Eval String", 300, 832)
+    },
+    tick() {
+        
+    },
+    init() {
+        EventHandler.registerButton(200, 900, 200, 64, ()=>{
+            this.init = false
+            tileManager.tiles = []
+            tileManager.totalGenerationChance = 0
+            LoadHandler.registerTiles()
+        })
+        EventHandler.registerButton(200, 800, 200, 64, ()=>{
+            try {
+                eval(prompt("EVAL"))
+                this.init = false
+                tileManager.tiles = []
+                tileManager.totalGenerationChance = 0
+                LoadHandler.registerTiles()
+            } catch(e) {
+                console.log(e)
+            }
+        })
+    }
+}
+SetupScreen.prototype.tick = function(...args) {
+    oldtick.apply(this, args)
+    extension.tick.apply(this, args)
+}
+SetupScreen.prototype.draw = function(...args) {
+    olddraw.apply(this, args)
+    extension.draw.apply(this, args)
+}
+SetupScreen.prototype.init = function(...args) {
+    oldinit.apply(this, args)
+    extension.init.apply(this, args)
+}
