@@ -9,22 +9,20 @@ const oldtick = SetupScreen.prototype.tick
 const oldinit = SetupScreen.prototype.init
 const extension = {
     draw() {
-        ctx.strokeText("Reload tiles", 300, 932)
-        ctx.fillText("Reload tiles", 300, 932)
-        ctx.strokeText("Eval String", 300, 832)
-        ctx.fillText("Eval String", 300, 832)
+        if (!setupScreen.tileInfoOverlayShowing) {
+            ctx.strokeText("Back to Title", 300, 932)
+            ctx.fillText("Back to Title", 300, 932)
+            ctx.strokeText("Code Editor", 300, 832)
+            ctx.fillText("Code Editor", 300, 832)
+        }
     },
     tick() {
         
     },
     init() {
         EventHandler.registerButton(200, 900, 200, 64, async ()=>{
-            tileManager.tiles = []
-            tileManager.totalGenerationChance = 0
-            GameHandler.state = GameState.Loading
-            await LoadHandler.registerTiles()
-            GameHandler.state = GameState.GameSetup
-            setupScreen = new SetupScreen()
+            GameHandler.state = GameState.Title
+            title = new Title()
         })
         EventHandler.registerButton(200, 800, 200, 64, ()=>{
             if (!container) {
