@@ -112,6 +112,7 @@ SetupScreen.prototype.draw = function(...args) {
     extension.draw.apply(this, args)
 }
 SetupScreen.prototype.init = function(...args) {
+    EventHandler.buttons = []
     oldinit.apply(this, args)
     extension.init.apply(this, args)
 }
